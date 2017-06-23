@@ -3,6 +3,18 @@ body {
 	margin: 0;
 }
 
+button {
+	margin-top: 20px;
+	line-height: 40px;
+	font-weight: bold;
+	background: black;
+	border-color: #F15B31;	
+}
+
+button:hover {
+	background: white;
+}
+
 h1 {
     color: #FFFFFF;
     letter-spacing: 1px;
