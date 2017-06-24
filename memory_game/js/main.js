@@ -9,7 +9,7 @@ var cards = [
 	{
 		rank: "queen",
 		suit: "diamonds",
-		cardIMG: "images/queen-of-diamondss.png"
+		cardIMG: "images/queen-of-diamonds.png"
 	},
 	{
 		rank: "king",
@@ -28,7 +28,7 @@ var inPlay = [];
 // Checks if two cards have been chosen.
 
 if (inPlay.length === 2) {
-
+	checkForMatch();
 }
 
 //Check if both chosen cards are equal.
@@ -50,7 +50,7 @@ function flipCard() {
 	console.log("User flipped " + cards[cardID].rank);
 	console.log(cards[cardID].cardIMG);
 	console.log(cards[cardID].suit);
-
+	}
 
 
 //Board creation with redefining source, data ID, and event listening.
