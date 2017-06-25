@@ -25,21 +25,38 @@ var cards = [
 
 var inPlay = [];
 
-// Checks if two cards have been chosen.
+//Sets current session score to be 0. highscoreStore is an attempt to store
+//high scores regardless of window exiting and refresh. Currently doesn't work
 
-if (inPlay.length === 2) {
-	checkForMatch();
-}
+var score = 0;
+var highscoreStore = window.localStorage.getItem('highscoreStore');
+if(window.localStorage.getItem('highscoreStore') == null){
+				if (score > highscoreStore){
+					window.localStorage.setItem("highscoreStore", score);
+				} else {
+					window.localStorage.setItem("highscoreStore", score);
+		}
+	}
 
-//Check if both chosen cards are equal.
+
+//Check if both chosen cards are equal and if two cards were chosen. **doesn't wor
 
 function checkForMatch(){
-	if(inPlay[0] === inPlay[1]){
-		alert("You have found a match!");
-	} else {
-		alert("Sorry, try again.");
+	if(inPlay.length === 2){
+		if(inPlay[0] === inPlay[1]) {
+			alert("You found a match!");
+			score += 1;
+			var updateScore = document.getElementById('currScore').innerHTML = score;
+			var updateHScore = document.getElementById('highScore').innerHTML = score;
+		
+		} else {
+			alert("Sorry, try again.");
+		}
 	}
+		
 }
+
+
 
 //Flip card with animation
 
@@ -50,7 +67,10 @@ function flipCard() {
 	console.log("User flipped " + cards[cardID].rank);
 	console.log(cards[cardID].cardIMG);
 	console.log(cards[cardID].suit);
-	}
+	if (inPlay.length === 2) {
+        checkForMatch();
+    }
+	};
 
 
 //Board creation with redefining source, data ID, and event listening.
@@ -61,12 +81,11 @@ function createBoard(){
 		cardElement.setAttribute('src', 'images/back.png');
 		cardElement.setAttribute('data-id', i);
 		cardElement.addEventListener('click', flipCard);
-		document.getElementById('game-board').appendChild(cardElement);	}
+		document.getElementById('game-board').appendChild(cardElement);	
+	}
 }
 
-createBoard();
-
-//Card position randomizer
+//Card position randomizer with choice exclusion.
 
 function randomizer(cards) {
 	var curIndex = cards.length, tempV, tempIndex;
@@ -82,18 +101,22 @@ function randomizer(cards) {
 	return cards;
 }
 
-//Randomizer call function
+//Randomizes cards on render, then prints board
 
-var doTheRandom = randomizer(cards);
+randomizer(cards);
+createBoard();
 
 //Button
 
-var button = document.createElement("button")
-button.innerHTML = "Reset and Shuffle";
+function resetter(){
+	inPlay.length = 0;
+	var newBoard = document.getElementById("game-board").innerHTML = null;
+	randomizer(cards);
+	createBoard();
+}
 
-var reset = document.getElementById(".reset")[0];
-reset.appendChild(button);
-
-button.addEventListener("click", doTheRandom);
+var button = document.getElementById("reset");
+button.addEventListener('click', resetter);
 
 
+//High Score Table

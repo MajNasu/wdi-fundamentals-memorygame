@@ -4,15 +4,25 @@ body {
 }
 
 button {
-	margin-top: 20px;
-	line-height: 40px;
-	font-weight: bold;
-	background: black;
+	margin: 0 auto;
+	font: 500 16px "Raleway";
+	background: white;
 	border-color: #F15B31;	
 }
 
 button:hover {
 	background: white;
+}
+
+table {
+	width: 75%;
+	margin: 0 auto;
+	font: 600 15px "Raleway";
+	border: solid 2.5px #b3cce6;
+}
+
+th, td {
+	padding: 7px;
 }
 
 h1 {
